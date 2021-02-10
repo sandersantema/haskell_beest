@@ -1,0 +1,54 @@
+cabal-version:       2.4
+name:                haskell_beest
+version:             0.0.0.0
+synopsis:            See README for more info
+description:
+    See README for more info.
+    See [README.md](https://github.com/sandersantema/haskell_beest#haskell_beest) for more details.
+homepage:            https://github.com/sandersantema/haskell_beest
+bug-reports:         https://github.com/sandersantema/haskell_beest/issues
+license:             MIT
+license-file:        LICENSE
+author:              Sander Santema
+maintainer:          Sander Santema <sanderbartsantema2@gmail.com>
+copyright:           2021 Sander Santema
+build-type:          Simple
+extra-doc-files:     README.md
+                     CHANGELOG.md
+tested-with:         GHC == 8.10.1
+
+source-repository head
+  type:                git
+  location:            https://github.com/sandersantema/haskell_beest.git
+
+common common-options
+  build-depends:       base ^>= 4.14.0.0
+
+  ghc-options:         -Wall
+                       -Wcompat
+                       -Widentities
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+                       -Wredundant-constraints
+  if impl(ghc >= 8.2)
+    ghc-options:       -fhide-source-paths
+  if impl(ghc >= 8.4)
+    ghc-options:       -Wmissing-export-lists
+                       -Wpartial-fields
+  if impl(ghc >= 8.8)
+    ghc-options:       -Wmissing-deriving-strategies
+                       -fwrite-ide-info
+                       -hiedir=.hie
+  if impl(ghc >= 8.10)
+    ghc-options:       -Wunused-packages
+
+  default-language:    Haskell2010
+  default-extensions:  NamedFieldPuns
+
+executable haskell_beest
+  import:              common-options
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -threaded
+                       -rtsopts
+                       -with-rtsopts=-N
